@@ -357,7 +357,7 @@ WHERE s.id_sale = 3;
 
 ![Resultado de la consulta en DBeaver: Canada](images/query-canada.png)
 
-Que la consulta devuelva `Canada` lo que confirma que la cadena `sales → cities_sales → cities → country` está bien enlazada de principio a fin.
+Que la consulta devuelva `Canada` confirma que la cadena `sales → cities_sales → cities → country` está bien enlazada de principio a fin.
 
 ---
 
@@ -438,8 +438,8 @@ erDiagram
 
 ```bash
 # 1. Clonar el repositorio
-git clone https://github.com/Jennydev-25/any-company-global.git
-cd any-company-global
+git clone https://github.com/Jennydev-25/db-normalization.git
+cd db-normalization
 ```
 
 2. **Crear la base de datos en DBeaver:** `Database` → `New Database Connection` → **SQLite** → `Create` → nombre del archivo `db_any_company_global.db`.
@@ -461,14 +461,15 @@ cd any-company-global
 ## 📁 Estructura del repositorio
 
 ```text
-any-company-global/
+db-normalization/
 ├── sql/
 │   ├── Script_1_create_table.sql
 │   ├── Script_2_insert_data.sql
 │   ├── Script_3_normalized_schema.sql
 │   ├── Script_4_data_migration.sql
 │   └── Script_5_get_country_sale_3.sql
-│   └── chen-er.drawio
+├── diagrams/
+│   └── chen-er-any-company-global.drawio
 ├── images/
 │   ├── chen-er.png
 │   ├── dbeaver-diagram.png
