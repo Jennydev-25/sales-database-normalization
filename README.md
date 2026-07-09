@@ -339,6 +339,64 @@ Modelo conceptual: las entidades (rectángulos), sus atributos (óvalos, con la 
 
 ---
 
+## 🗄️ Esquema de base de datos (DBeaver)
+
+Modelo físico generado automáticamente por DBeaver a partir de la base de datos ya normalizada. Muestra las 8 tablas con sus campos, claves y las relaciones de clave foránea reales.
+
+![Esquema de base de datos en DBeaver](images/dbeaver-diagram.png)
+
+Versión Mermaid del mismo modelo:
+
+```mermaid
+erDiagram
+    continent       ||--o{ country          : "has"
+    country         ||--o{ cities           : "has"
+    food_category   ||--o{ food_subcategory : "groups"
+    cities          ||--o{ cities_sales     : "located in"
+    sales           ||--o{ cities_sales     : "recorded in"
+    food_subcategory||--o{ food_sales       : "classified in"
+    sales           ||--o{ food_sales       : "recorded in"
+
+    continent {
+        int id_continent PK
+        varchar continent_name
+    }
+    country {
+        char country_code PK
+        varchar country_name
+        int continent_id FK
+    }
+    cities {
+        int id_city PK
+        varchar city_name
+        char country_code FK
+    }
+    food_category {
+        int id_category PK
+        varchar category_name
+    }
+    food_subcategory {
+        int id_subcategory PK
+        varchar subcategory_name
+        int category_id FK
+    }
+    sales {
+        int id_sale PK
+        date sale_date
+        bigint unit_sales
+    }
+    cities_sales {
+        int city_id PK "FK"
+        int sale_id PK "FK"
+    }
+    food_sales {
+        int subcategory_id PK "FK"
+        int sale_id PK "FK"
+    }
+```
+
+---
+
 ## 👩‍💻 Autora
 
 **[Jenny Sánchez Requejo](https://github.com/Jennydev-25)**
