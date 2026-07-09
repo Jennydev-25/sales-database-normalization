@@ -306,6 +306,31 @@ WHERE s.id_sale = 3;
 
 ---
 
+## 🔎 Consulta final: país de la venta id 3
+
+Para recuperar el país de la venta con `id = 3` hay que recorrer toda la cadena de relaciones desde la tabla de hecho hasta la de países, pasando por la tabla puente y por ciudades:
+
+```sql
+SELECT co.country_name
+FROM sales s
+JOIN cities_sales cs ON s.id_sale = cs.sale_id
+JOIN cities ci       ON cs.city_id = ci.id_city
+JOIN country co      ON ci.country_code = co.country_code
+WHERE s.id_sale = 3;
+```
+
+**Resultado:**
+
+| country_name |
+| ------------ |
+| Canada       |
+
+![Resultado de la consulta en DBeaver: Canada](images/query-canada.png)
+
+Que la consulta devuelva `Canada` lo que confirma que la cadena `sales → cities_sales → cities → country` está bien enlazada de principio a fin.
+
+---
+
 ## 👩‍💻 Autora
 
 **[Jenny Sánchez Requejo](https://github.com/Jennydev-25)**
