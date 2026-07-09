@@ -331,6 +331,14 @@ Que la consulta devuelva `Canada` lo que confirma que la cadena `sales → citie
 
 ---
 
+## 📐 Diagrama Entidad-Relación (Modelo de Chen)
+
+Modelo conceptual: las entidades (rectángulos), sus atributos (óvalos, con la PK subrayada) y las relaciones (rombos) con sus cardinalidades. Las relaciones N:M venta–ciudad y venta–producto se representan aquí de forma conceptual; en el modelo físico se resuelven con las tablas puente `cities_sales` y `food_sales`.
+
+![Diagrama ER de Chen](images/chen-er.png)
+
+---
+
 ## 👩‍💻 Autora
 
 **[Jenny Sánchez Requejo](https://github.com/Jennydev-25)**
