@@ -4,6 +4,36 @@
 
 ---
 
+## 📸 Vista previa
+
+A continuación se muestran los principales resultados obtenidos durante el proceso de normalización.
+
+|    Modelo ER (Chen)     |    Esquema físico (DBeaver)     |  Consulta final → `Canada`   |
+| :---------------------: | :-----------------------------: | :--------------------------: |
+| ![](images/chen-er.png) | ![](images/dbeaver-diagram.png) | ![](images/query-canada.png) |
+
+---
+
+## 📑 Índice
+
+- [Descripción](#-descripción)
+- [Tabla original](#️-tabla-original)
+- [Proceso de normalización](#-proceso-de-normalización)
+- [Modelo final](#-modelo-final)
+- [Relaciones del modelo](#-relaciones-del-modelo)
+- [Claves primarias y foráneas](#-claves-primarias-y-foráneas)
+- [Scripts SQL](#-scripts-sql)
+- [Consulta final](#-consulta-final-país-de-la-venta-id-3)
+- [Diagrama ER de Chen](#-diagrama-entidad-relación-modelo-de-chen)
+- [Esquema de base de datos (DBeaver)](#-esquema-de-base-de-datos-dbeaver)
+- [Cómo reproducir el proyecto](#-cómo-reproducir-el-proyecto)
+- [Estructura del repositorio](#-estructura-del-repositorio)
+- [Tecnologías](#️-tecnologías)
+- [Recursos](#-recursos)
+- [Autora](#-autora)
+
+---
+
 ## 📋 Descripción
 
 El objetivo de este proyecto es partir de una tabla de ventas totalmente desnormalizada (`sales_not_normalized`) y aplicarle las tres primeras formas normales (1FN, 2FN y 3FN) para obtener un modelo relacional limpio, sin redundancias ni dependencias transitivas, implementado directamente en una base de datos SQLite.
@@ -394,6 +424,80 @@ erDiagram
         int sale_id PK "FK"
     }
 ```
+
+---
+
+## 🚀 Cómo reproducir el proyecto
+
+### Requisitos previos
+
+- **[DBeaver](https://dbeaver.io/download/)** instalado (el driver de SQLite viene incluido; DBeaver lo descarga solo la primera vez que creas la conexión).
+- **[Git](https://git-scm.com/downloads)** para clonar el repositorio.
+
+### Pasos
+
+```bash
+# 1. Clonar el repositorio
+git clone https://github.com/Jennydev-25/any-company-global.git
+cd any-company-global
+```
+
+2. **Crear la base de datos en DBeaver:** `Database` → `New Database Connection` → **SQLite** → `Create` → nombre del archivo `db_any_company_global.db`.
+
+3. **Ejecutar los scripts en orden**, abriéndolos en el editor SQL de DBeaver y ejecutando el script completo (`Alt + X`):
+
+   | Orden | Script                            | Qué hace                                            |
+   | :---: | --------------------------------- | --------------------------------------------------- |
+   |   1   | `Script_1_create_table.sql`       | Crea la tabla desnormalizada `sales_not_normalized` |
+   |   2   | `Script_2_insert_data.sql`        | Inserta los 10 registros de partida                 |
+   |   3   | `Script_3_normalized_schema.sql`  | Crea las 8 tablas normalizadas con sus PK y FK      |
+   |   4   | `Script_4_data_migration.sql`     | Vuelca los datos a las tablas normalizadas          |
+   |   5   | `Script_5_get_country_sale_3.sql` | Consulta el país de la venta id 3 → `Canada`        |
+
+4. **Verificar el resultado:** al ejecutar `Script_5_get_country_sale_3.sql`, la consulta debe devolver una única fila con el valor `Canada`.
+
+---
+
+## 📁 Estructura del repositorio
+
+```text
+any-company-global/
+├── sql/
+│   ├── Script_1_create_table.sql
+│   ├── Script_2_insert_data.sql
+│   ├── Script_3_normalized_schema.sql
+│   ├── Script_4_data_migration.sql
+│   └── Script_5_get_country_sale_3.sql
+│   └── chen-er.drawio
+├── images/
+│   ├── chen-er.png
+│   ├── dbeaver-diagram.png
+│   └── query-canada.png
+├── README.md
+└── .gitignore
+```
+
+---
+
+## 🛠️ Tecnologías
+
+- **[SQLite](https://www.sqlite.org/)** — Motor de base de datos ligero (un único archivo `.db`) donde vive la base de datos `db_any_company_global`.
+- **[DBeaver](https://dbeaver.io/)** — Cliente de base de datos usado para crear la BD, ejecutar los scripts, normalizar y generar el diagrama físico del esquema.
+- **[diagrams.net (draw.io)](https://www.diagrams.net/)** — Creación del diagrama Entidad-Relación en notación de Chen.
+- **[Mermaid](https://mermaid.js.org/)** — Versión en texto del diagrama del esquema embebida en el README.
+- **[Visual Studio Code](https://code.visualstudio.com/)** — Editor usado para redactar la documentación y gestionar el proyecto.
+- **[Markdown](https://www.markdownguide.org/)** — Lenguaje de marcado para el README.
+- **[Git](https://git-scm.com/)** / **[GitHub](https://github.com/)** — Control de versiones y alojamiento del proyecto.
+
+---
+
+## 📚 Recursos
+
+- **[diagrams.net](https://app.diagrams.net/)** — Herramienta gratuita para diagramas ER, UML y otros esquemas.
+- **[Normalización de Bases de Datos (freeCodeCamp)](https://www.freecodecamp.org/espanol/news/normalizacion-de-base-de-datos-formas-normales-1nf-2nf-3nf-ejemplos-de-tablas/)** — Explicación de la 1FN, 2FN y 3FN con ejemplos.
+- **[Modelo Entidad-Relación](https://es.wikipedia.org/wiki/Modelo_entidad-relaci%C3%B3n)** — Introducción general al modelo ER (referencia indicada en el enunciado del ejercicio).
+- **[Cómo crear un diagrama de base de datos](https://www.edrawsoft.com/es/how-to-create-database-diagram.html)** — Guía para diseñar diagramas de base de datos.
+- **[Mermaid - Entity Relationship Diagrams](https://mermaid.js.org/syntax/entityRelationshipDiagram.html)** — Documentación de Mermaid para diagramas ER.
 
 ---
 
